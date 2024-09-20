@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Tech Builders - Innovative Construction Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <style>
+        :root {
+            --primary-color: #000000;
+            --secondary-color: #1a1a1a;
+            --accent-color: #00c853;
+            --text-color: #ffffff;
+            --light-text: #b0b0b0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+        }
+
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .navbar-link {
+            position: relative;
+            color: var(--text-color);
+            transition: color 0.3s ease-in-out;
+        }
+
+        .navbar-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease-in-out;
+        }
+
+        .navbar-link:hover {
+            color: var(--accent-color);
+        }
+
+        .navbar-link:hover::after {
+            width: 100%;
+        }
+
+        .btn {
+            @apply bg-accent-color text-black font-bold py-2 px-6 rounded-full transition duration-300 ease-in-out;
+        }
+
+        .btn:hover {
+            @apply bg-green-600 transform -translate-y-1 shadow-lg;
+        }
+
+        .main-heading {
+            font-size: 4.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(164, 19, 19, 0.5);
+        }
+
+        .sub-heading {
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .hamburger {
+            width: 30px;
+            height: 20px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            display: block;
+            position: absolute;
+            height: 3px;
+            width: 100%;
+            background: var(--accent-color);
+            border-radius: 3px;
+            opacity: 1;
+            left: 0;
+            transform: rotate(0deg);
+            transition: .25s ease-in-out;
+        }
+
+        .hamburger span:nth-child(1) { top: 0px; }
+        .hamburger span:nth-child(2) { top: 8px; }
+        .hamburger span:nth-child(3) { top: 16px; }
+
+        .hamburger.open span:nth-child(1) {
+            top: 8px;
+            transform: rotate(135deg);
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+            left: -60px;
+        }
+
+        .hamburger.open span:nth-child(3) {
+            top: 8px;
+            transform: rotate(-135deg);
+        }
+
+        .nav-menu {
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+
+        .btn {
+            @apply bg-teal-500 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out;
+        }
+
+        .btn:hover {
+            @apply bg-teal-600 transform -translate-y-1 shadow-lg;
+        }
+
+        .project-progress {
+            @apply bg-gray-700 rounded-full h-4 mt-2;
+        }
+
+        .progress-bar {
+            @apply bg-teal-500 rounded-full h-4 transition-all duration-500 ease-out;
+        }
+
+        .testimonial-carousel {
+            @apply flex overflow-x-auto snap-x snap-mandatory scrollbar-hide;
+        }
+
+        .testimonial-item {
+            @apply flex-shrink-0 w-full snap-center;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .footer-section h4 {
+        position: relative;
+        padding-bottom: 8px;
+    }
+    .footer-section h4::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 24px;
+        height: 2px;
+        background-color: #4fd1c5;
+    }
+    .footer-section ul li {
+        transition: transform 0.3s ease;
+    }
+    .footer-section ul li:hover {
+        transform: translateX(5px);
+    }
+    @media (max-width: 640px) {
+        .footer-section {
+            text-align: center;
+        }
+        .footer-section h4::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .footer-section .flex {
+            justify-content: center;
+        }
+    }
+    </style>
+</head>
+<body class="antialiased">
+    <nav class="navbar fixed w-full z-50 transition duration-300 ease-in-out">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-accent-color">Real Tech Builders</a>
+            <ul class="hidden lg:flex space-x-8">
+                <li><a href="#home" class="navbar-link">Home</a></li>
+                <li><a href="#about" class="navbar-link">About</a></li>
+                <li><a href="#services" class="navbar-link">Services</a></li>
+                <li><a href="#work" class="navbar-link">Our Work</a></li>
+                <li><a href="#testimonials" class="navbar-link">Testimonials</a></li>
+                <li><a href="#contact" class="navbar-link">Contact</a></li>
+            </ul>
+            <div class="hamburger lg:hidden">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div class="nav-menu hidden lg:hidden bg-gray-900 w-full absolute top-full left-0 transform -translate-y-full opacity-0 transition-all duration-300 ease-in-out">
+            <ul class="container mx-auto px-4 py-4 space-y-4">
+                <li><a href="#home" class="block hover:text-teal-500 transition duration-300">Home</a></li>
+                <li><a href="#about" class="block hover:text-teal-500 transition duration-300">About</a></li>
+                <li><a href="#services" class="block hover:text-teal-500 transition duration-300">Services</a></li>
+                <li><a href="#work" class="block hover:text-teal-500 transition duration-300">Our Work</a></li>
+                <li><a href="#testimonials" class="block hover:text-teal-500 transition duration-300">Testimonials</a></li>
+                <li><a href="#contact" class="block hover:text-teal-500 transition duration-300">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header id="home" class="relative h-screen flex items-center justify-center text-center">
+        <video class="absolute top-0 left-0 w-full h-full object-cover opacity-70" autoplay loop muted>
+            <source src="/projects/main.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="relative z-10 max-w-4xl px-6" data-aos="fade-up">
+            <h1 class="main-heading mb-4">Welcome to <span class="text-accent-color">Real Tech Builders</span></h1>
+            <p class="sub-heading mb-8">Innovative construction solutions for a sustainable future</p>
+            <a href="#contact" class="btn">Get in Touch</a>
+        </div>
+    </header>
+
+    <section id="about" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 text-teal-500" data-aos="fade-up">About Us</h2>
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-8 lg:mb-0 lg:pr-8" data-aos="fade-right">
+                    <p class="text-lg mb-4">Real Tech Builders is a leading construction company with over 20 years of experience in delivering innovative and sustainable building solutions. Our team of expert engineers, architects, and construction professionals is committed to excellence in every project we undertake.</p>
+                    <p class="text-lg mb-4">We specialize in commercial, industrial, and residential construction, leveraging cutting-edge technology and eco-friendly practices to create structures that stand the test of time.</p>
+                    <p class="text-lg">Our mission is to shape the future of urban landscapes by creating spaces that inspire, endure, and enhance the lives of those who inhabit them.</p>
+                </div>
+                <div class="lg:w-1/2" data-aos="fade-left">
+                    <img src="/projects/about.jpg" alt="Real Tech Builders Team" class="rounded-lg shadow-xl">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 text-teal-500" data-aos="fade-up">Our Services</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-gray-800 p-8 rounded-lg shadow-lg text-center" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-building text-5xl text-teal-500 mb-4"></i>
+                    <h3 class="text-2xl font-semibold mb-4">Commercial Construction</h3>
+                    <p>State-of-the-art commercial buildings designed for efficiency and style</p>
+                </div>
+                <div class="bg-gray-800 p-8 rounded-lg shadow-lg text-center" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-industry text-5xl text-teal-500 mb-4"></i>
+                    <h3 class="text-2xl font-semibold mb-4">Industrial Construction</h3>
+                    <p>Modern industrial facilities built to enhance productivity</p>
+                </div>
+                <div class="bg-gray-800 p-8 rounded-lg shadow-lg text-center" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fas fa-home text-5xl text-teal-500 mb-4"></i>
+                    <h3 class="text-2xl font-semibold mb-4">Residential Construction</h3>
+                    <p>Luxurious and sustainable homes for modern living</p>
+                </div>
+                <div class="bg-gray-800 p-8 rounded-lg shadow-lg text-center" data-aos="fade-up" data-aos-delay="400">
+                    <i class="fas fa-leaf text-5xl text-teal-500 mb-4"></i>
+                    <h3 class="text-2xl font-semibold mb-4">Green Building</h3>
+                    <p>Eco-friendly construction solutions for a sustainable future</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="work" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 text-teal-500" data-aos="fade-up">Our Work</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="relative overflow-hidden rounded-lg shadow-lg group" data-aos="fade-up">
+                    <img src="/projects/project1.jpeg" alt="Eco-friendly Office Complex" class="w-full h-full object-cover transition duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-75 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <div class="text-center p-4">
+                            <h3 class="text-xl font-semibold mb-2">Eco-friendly Office Complex</h3>
+                            <p class="mb-4">LEED Platinum certified, 100,000 sq ft</p>
+                            <a href="#" class="btn">View Case Study</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative overflow-hidden rounded-lg shadow-lg group" data-aos="fade-up" data-aos-delay="100">
+                    <img src="/projects/project1.jpeg" alt="Smart City Development" class="w-full h-full object-cover transition duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-75 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <div class="text-center p-4">
+                            <h3 class="text-xl font-semibold mb-2">Smart City Development</h3>
+                            <p class="mb-4">Integrated IoT solutions, 500-acre project</p>
+                            <a href="#" class="btn">View Case Study</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative overflow-hidden rounded-lg shadow-lg group" data-aos="fade-up" data-aos-delay="200">
+                    <img src="/projects/project1.jpeg" alt="Sustainable Housing Complex" class="w-full h-full object-cover transition duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-75 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <div class="text-center p-4">
+                            <h3 class="text-xl font-semibold mb-2">Sustainable Housing Complex</h3>
+                            <p class="mb-4">Net-zero energy, 200 residential units</p>
+                            <a href="#" class="btn">View Case Study</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative overflow-hidden rounded-lg shadow-lg group" data-aos="fade-up" data-aos-delay="300">
+                    <img src="/projects/project1.jpeg" alt="Advanced Manufacturing Facility" class="w-full h-full object-cover transition duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-75 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <div class="text-center p-4">
+                            <h3 class="text-xl font-semibold mb-2">Advanced Manufacturing Facility</h3>
+                            <p class="mb-4">Industry 4.0 ready, 250,000 sq ft</p>
+                            <a href="#" class="btn">View Case Study</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="ongoing-projects" class="py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 text-teal-500" data-aos="fade-up">Ongoing Projects<section id="ongoing-projects" class="py-20">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-4xl font-bold text-center mb-12 text-teal-500" data-aos="fade-up">Ongoing Projects</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg" data-aos="fade-up">
+                            <img src="/projects/project1.jpeg" alt="Green Towers" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="text-2xl font-semibold mb-2">Green Towers</h3>
+                                <p class="mb-4">Sustainable multi-use skyscraper with vertical gardens</p>
+                                <div class="project-progress">
+                                    <div class="progress-bar" style="width: 70%;"></div>
+                                </div>
+                                <p class="mt-2">Progress: 70%</p>
+                            </div>
+                        </div>
+                        <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                            <img src="/projects/project1.jpeg" alt="Smart Hospital" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="text-2xl font-semibold mb-2">Smart Hospital</h3>
+                                <p class="mb-4">State-of-the-art medical facility with AI integration</p>
+                                <div class="project-progress">
+                                    <div class="progress-bar" style="width: 40%;"></div>
+                                </div>
+                                <p class="mt-2">Progress: 40%</p>
+                            </div>
+                        </div>
+                        <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                            <img src="/projects/project1.jpeg" alt="Eco-Industrial Park" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="text-2xl font-semibold mb-2">Eco-Industrial Park</h3>
+                                <p class="mb-4">Circular economy-based industrial complex</p>
+                                <div class="project-progress">
+                                    <div class="progress-bar" style="width: 25%;"></div>
+                                </div>
+                                <p class="mt-2">Progress: 25%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        
+            <section id="ceo" class="py-20 bg-gray-900">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-4xl font-bold text-center mb-12 text-teal-500" data-aos="fade-up">Meet Our CEO</h2>
+                    <div class="flex flex-col lg:flex-row items-center">
+                        <div class="lg:w-1/3 mb-8 lg:mb-0" data-aos="fade-right">
+                            <img src="/projects/project1.jpeg" alt="John Doe, CEO of Real Tech Builders" class="rounded-lg shadow-xl mx-auto">
+                        </div>
+                        <div class="lg:w-2/3 lg:pl-12" data-aos="fade-left">
+                            <h3 class="text-3xl font-semibold mb-4">John Doe</h3>
+                            <p class="text-lg mb-4">John Doe is the visionary leader behind Real Tech Builders, with over 25 years of experience in the construction and technology sectors. His innovative approach to sustainable building practices has positioned Real Tech Builders at the forefront of the industry.</p>
+                            <p class="text-lg mb-4">Under John's leadership, the company has successfully completed over 500 projects worldwide, earning numerous awards for excellence in design, sustainability, and technological integration.</p>
+                            <blockquote class="text-xl italic border-l-4 border-teal-500 pl-4 py-2 mb-4">"Our goal is not just to construct buildings, but to shape the future of urban living. We believe in creating spaces that inspire, endure, and enhance the lives of those who inhabit them."</blockquote>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        
+            <section class="statistics py-20">
+                <div class="container mx-auto px-4">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                        <div class="text-center" data-aos="fade-up">
+                            <div class="text-4xl font-bold text-teal-500 mb-2" data-target="500">0</div>
+                            <div class="text-lg">Projects Completed</div>
+                        </div>
+                        <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+                            <div class="text-4xl font-bold text-teal-500 mb-2" data-target="20">0</div>
+                            <div class="text-lg">Years of Experience</div>
+                        </div>
+                        <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+                            <div class="text-4xl font-bold text-teal-500 mb-2" data-target="100">0</div>
+                            <div class="text-lg">Team Members</div>
+                        </div>
+                        <div class="text-center" data-aos="fade-up" data-aos-delay="300">
+                            <div class="text-4xl font-bold text-teal-500 mb-2" data-target="50">0</div>
+                            <div class="text-lg">Awards Won</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        
+            <section id="testimonials" class="testimonials py-20 bg-gray-900">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-4xl font-bold text-center mb-12 text-teal-500" data-aos="fade-up">What Our Clients Say</h2>
+                    <div class="testimonial-carousel">
+                        <div class="testimonial-item px-4" data-aos="fade-up" data-aos-delay="100">
+                            <div class="bg-gray-800 p-8 rounded-lg shadow-lg">
+                                <p class="text-lg mb-4">"Real Tech Builders delivered our eco-friendly office complex on time and exceeded our sustainability goals. Their innovative approach to green building is commendable."</p>
+                                <p class="font-semibold text-teal-500">- Sarah Chen, CEO of GreenTech Innovations</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-item px-4" data-aos="fade-up" data-aos-delay="200">
+                            <div class="bg-gray-800 p-8 rounded-lg shadow-lg">
+                                <p class="text-lg mb-4">"The team's expertise in smart city development helped us create a truly integrated and future-proof urban space. Their attention to detail in IoT implementation was impressive."</p>
+                                <p class="font-semibold text-teal-500">- Rahul Mehta, Urban Planning Director</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-item px-4" data-aos="fade-up" data-aos-delay="300">
+                            <div class="bg-gray-800 p-8 rounded-lg shadow-lg">
+                                <p class="text-lg mb-4">"From concept to completion, Real Tech Builders demonstrated professionalism and innovation in our sustainable housing project. The net-zero energy achievement is remarkable."</p>
+                                <p class="font-semibold text-teal-500">- Emma Thompson, Sustainable Living Foundation</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        
+            <section id="contact" class="contact py-20">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-4xl font-bold text-center mb-12 text-teal-500" data-aos="fade-up">Get in Touch</h2>
+                    <form class="max-w-lg mx-auto" data-aos="fade-up" data-aos-delay="100">
+                        <div class="mb-6">
+                            <label for="name" class="block mb-2 font-semibold">Name</label>
+                            <input type="text" id="name" name="name" required class="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:outline-none focus:border-teal-500">
+                        </div>
+                        <div class="mb-6">
+                            <label for="email" class="block mb-2 font-semibold">Email</label>
+                            <input type="email" id="email" name="email" required class="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:outline-none focus:border-teal-500">
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block mb-2 font-semibold">Message</label>
+                            <textarea id="message" name="message" required class="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:outline-none focus:border-teal-500 h-32"></textarea>
+                        </div>
+                        <button type="submit" class="btn w-full">Send Message</button>
+                    </form>
+                </div>
+            </section>
+        
+            <footer class="bg-gray-900 py-12 border-t border-gray-800 text-sm">
+                <div class="container mx-auto px-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                        <div class="footer-section">
+                            <h3 class="text-xl font-bold text-teal-500 mb-3">Real Tech Builders</h3>
+                            <p class="text-gray-400 mb-4 text-sm">Innovative construction solutions for a sustainable future. Building tomorrow, today.</p>
+                            <div class="flex space-x-4">
+                                <a href="#" class="text-gray-400 hover:text-teal-500 transition duration-300"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="text-gray-400 hover:text-teal-500 transition duration-300"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="text-gray-400 hover:text-teal-500 transition duration-300"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" class="text-gray-400 hover:text-teal-500 transition duration-300"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                        <div class="footer-section">
+                            <h4 class="text-lg font-semibold text-white mb-3">Quick Links</h4>
+                            <ul class="space-y-2 text-sm">
+                                <li><a href="#home" class="text-gray-400 hover:text-teal-500 transition duration-300">Home</a></li>
+                                <li><a href="#about" class="text-gray-400 hover:text-teal-500 transition duration-300">About Us</a></li>
+                                <li><a href="#services" class="text-gray-400 hover:text-teal-500 transition duration-300">Our Services</a></li>
+                                <li><a href="#work" class="text-gray-400 hover:text-teal-500 transition duration-300">Our Work</a></li>
+                                <li><a href="#contact" class="text-gray-400 hover:text-teal-500 transition duration-300">Contact Us</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-section">
+                            <h4 class="text-lg font-semibold text-white mb-3">Contact Info</h4>
+                            <ul class="space-y-2 text-sm text-gray-400">
+                                <li class="flex items-center"><i class="fas fa-map-marker-alt mr-2 text-teal-500"></i>123 Tech Street, Innovation City, 12345</li>
+                                <li class="flex items-center"><i class="fas fa-phone-alt mr-2 text-teal-500"></i>+1 (555) 123-4567</li>
+                                <li class="flex items-center"><i class="fas fa-envelope mr-2 text-teal-500"></i>info@realtechbuilders.com</li>
+                                <li class="flex items-center"><i class="fas fa-clock mr-2 text-teal-500"></i>Mon - Fri: 9:00 AM - 5:00 PM</li>
+                            </ul>
+                        </div>
+                        <div class="footer-section">
+                            <h4 class="text-lg font-semibold text-white mb-3">Newsletter</h4>
+                            <p class="text-gray-400 mb-3 text-sm">Stay updated with our latest news and offers.</p>
+                            <form class="flex flex-col sm:flex-row">
+                                <input type="email" placeholder="Your email" class="flex-grow px-3 py-2 text-sm mb-2 sm:mb-0 sm:mr-2 rounded-md bg-gray-800 border border-gray-700 focus:outline-none focus:border-teal-500">
+                                <button type="submit" class="bg-teal-500 text-white px-4 py-2 text-sm rounded-md hover:bg-teal-600 transition duration-300">Subscribe</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="border-t border-gray-800 pt-6 flex flex-col md:flex-row justify-between items-center text-xs">
+                        <p class="text-gray-400 mb-4 md:mb-0">&copy; 2024 Real Tech Builders. All rights reserved.</p>
+                        <div class="flex flex-wrap justify-center md:justify-end space-x-4">
+                            <a href="#" class="text-gray-400 hover:text-teal-500 transition duration-300">Privacy Policy</a>
+                            <a href="#" class="text-gray-400 hover:text-teal-500 transition duration-300">Terms of Service</a>
+                            <a href="#" class="text-gray-400 hover:text-teal-500 transition duration-300">Cookie Policy</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+            <script>
+                // Initialize AOS
+                AOS.init({
+                    duration: 1000,
+                    once: true
+                });
+        
+                // Navbar scroll effect
+                const navbar = document.querySelector('.navbar');
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 50) {
+                        navbar.classList.add('bg-gray-900');
+                        navbar.classList.remove('bg-transparent');
+                    } else {
+                        navbar.classList.remove('bg-gray-900');
+                        navbar.classList.add('bg-transparent');
+                    }
+                });
+        
+                // Hamburger menu
+                const hamburger = document.querySelector('.hamburger');
+                const navMenu = document.querySelector('.nav-menu');
+                hamburger.addEventListener('click', () => {
+                    hamburger.classList.toggle('open');
+                    navMenu.classList.toggle('hidden');
+                    navMenu.classList.toggle('transform');
+                    navMenu.classList.toggle('-translate-y-full');
+                    navMenu.classList.toggle('opacity-0');
+                });
+        
+                // Close mobile menu when clicking on a link
+                const navLinks = document.querySelectorAll('.nav-menu a');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        hamburger.classList.remove('open');
+                        navMenu.classList.add('hidden');
+                        navMenu.classList.add('transform');
+                        navMenu.classList.add('-translate-y-full');
+                        navMenu.classList.add('opacity-0');
+                    });
+                });
+        
+                // Statistics counter animation
+                const stats = document.querySelectorAll('.statistics [data-target]');
+                stats.forEach(stat => {
+                    const target = parseInt(stat.getAttribute('data-target'));
+                    const increment = target / 200;
+                    let current = 0;
+        
+                    const updateCounter = () => {
+                        if (current < target) {
+                            current += increment;
+                            stat.textContent = Math.ceil(current);
+                            setTimeout(updateCounter, 10);
+                        } else {
+                            stat.textContent = target;
+                        }
+                    };
+        
+                    const observer = new IntersectionObserver((entries) => {
+                        if (entries[0].isIntersecting) {
+                            updateCounter();
+                            observer.unobserve(stat);
+                        }
+                    }, { threshold: 0.5 });
+        
+                    observer.observe(stat);
+                });
+        
+                // Smooth scrolling for navigation links
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        document.querySelector(this.getAttribute('href')).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    });
+                });
+            </script>
+        </body>
+        </html>
